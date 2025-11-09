@@ -1,0 +1,46 @@
+{
+  "name": "{{ extension_slug }}",
+  "description": "{{ extension_description }}",
+  "version": "0.0.0",
+  "author": {
+    "name": "Bruno Paz",
+    "email": "oss@brunopaz.dev",
+    "url": "https://brunopaz.dev"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "repository": {
+    "url": "{{ repository_url }}"
+  },
+  "scripts": {
+    "compile": "tsc --noEmit",
+    "dev": "vite",
+    "build": "vite build",
+    "format": "prettier --write",
+    "format:check": "prettier --check .",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts",
+    "sign": "web-ext sign -s dist --use-submission-api",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/webextension-polyfill": "^0.12.4",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.2.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3",
+    "vite": "^7.2.2",
+    "vite-plugin-web-extension": "^4.5.0",
+    "vitepress": "^1.6.4",
+    "web-ext": "^9.1.0",
+    "webextension-polyfill": "^0.12.0"
+  }
+}

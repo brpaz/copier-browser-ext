@@ -1,0 +1,85 @@
+name: "Release"
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+env:
+  PNPM_VERSION: 10
+  EXTENSION_NAME: "{{ extension_slug }}"
+
+{% raw %}
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.target_commitish }}
+
+      - uses: fregante/setup-git-user@v2
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: bump version
+        run: pnpm version ${{ github.event.release.tag_name }}
+
+      - name: create arttifact directory
+        run: mkdir -p build-artifacts
+
+      - name: Build (Chrome)
+        run: |
+          TARGET=chrome pnpm build
+          cd dist
+          zip -r ${{env.EXTENSION_NAME}}-${{github.event.release.tag_name}}-chrome.zip ./*
+
+          cd ..
+          mv dist/${{env.EXTENSION_NAME}}-${{github.event.release.tag_name}}-chrome.zip build-artifacts/
+
+      - name: Build (Firefox)
+        run: |
+          TARGET=firefox pnpm build
+          pnpm run sign
+
+          find web-ext-artifacts -type f -name "*.xpi" -exec mv {} build-artifacts/${{env.EXTENSION_NAME}}-${{github.event.release.tag_name}}-firefox.xpi \;
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
+          WEB_EXT_CHANNEL: "listed"
+
+      - name: Upload release artifacts
+        uses: Roang-zero1/github-upload-release-artifacts-action@master
+        with:
+          args: "build-artifacts/"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.tag_name }}
+          release-notes: ${{ github.event.release.body }}
+
+      - name: Commit release files
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          branch: ${{ github.event.release.target_commitish }}
+          commit_message: "chore(release): [skip-ci] ${{ github.event.release.tag_name }}"
+          file_pattern: CHANGELOG.md package.json
+{% endraw %}

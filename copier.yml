@@ -1,0 +1,35 @@
+_min_copier_version: 9.0.0
+_subdirectory: template
+extension_name:
+  type: str
+  help: What is your extension name?
+  validator: >-
+    {% if not extension_name %}
+    extension_name cannot be empty.
+    {% endif %}
+
+extension_slug:
+  type: str
+  default: "{{ extension_name | lower | replace(' ', '-') }}"
+  when: false
+
+extension_description:
+  type: str
+  help: A short description of your extension.
+
+repository_slug:
+  type: str
+  help: GitHub repository identifier (username/repo-name).
+  validator: >-
+    {% if not (repository_slug | regex_search('^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$')) %}
+    repository_slug must be in the format 'username/repo-name'.
+    {% endif %}
+
+repository_url:
+  type: str
+  help: The URL of the repository.
+  default: "https://github.com/{{ repository_slug }}"
+
+# Global tasks
+_tasks:
+  - "git init"
