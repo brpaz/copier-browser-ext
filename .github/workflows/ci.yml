@@ -50,9 +50,9 @@ jobs:
           echo "Checking essential files in: $OUTPUT_DIR"
 
           REQUIRED_FILES=(
-            "package.json",
-            "README.md",
-            "src/manifest.json",
+            "package.json"
+            "README.md"
+            "src/manifest.json"
             "vite.config.ts"
           )
 
