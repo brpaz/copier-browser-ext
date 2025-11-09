@@ -12,8 +12,8 @@
         "brpaz"
     ],
     "npm": {
-        "fileMatch": [
-            "template/\\{\\{extension_slug}}/package.json.jinja$"
+        "managerFilePatterns": [
+            "/template/\\{\\{extension_slug}}/package.json.jinja$/"
         ]
     }
 }
