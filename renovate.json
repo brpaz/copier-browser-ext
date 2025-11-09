@@ -10,5 +10,10 @@
     ],
     "reviewers": [
         "brpaz"
-    ]
+    ],
+    "npm": {
+        "fileMatch": [
+            "template/\\{\\{extension_slug}}/package.json.jinja$"
+        ]
+    }
 }
