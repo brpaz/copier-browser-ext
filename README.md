@@ -13,9 +13,12 @@
 
 - [Vite](https://vitejs.dev/) with [Vite Plugin Web Extension](https://vite-plugin-web-extension.aklinker1.io/).
 - [TypeScript](https://www.typescriptlang.org/) for type safety.
+- [PNPM](https://pnpm.io/) as package manager.
 - [Eslint](https://eslint.org/) and [Prettier](https://prettier.io/) for code quality and formatting.
 - Support for both Chrome and Firefox.
 - Documentation with [VitePress](https://vitepress.vuejs.org/).
+- GitHub Actions workflows for CI and Release automation.
+- [Release Drafter](https://github.com/marketplace/actions/release-drafter) for automatic release creation and changelog generation.
 
 ## 🚀 Getting Started
 
@@ -34,7 +37,6 @@ copier copy gh:brpaz/copier-browser-ext /path/to/your/new/project
 ```
 
 And answer the prompts to customize your new project.
-
 
 ### Customize Your Extension
 
