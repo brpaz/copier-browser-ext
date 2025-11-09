@@ -42,7 +42,7 @@ jobs:
             -d repository_url="https://github.com/testuser/test-repo" \
             -d repository_slug="testuser/test-repo" \
             . "$tmpdir"
-          echo "output_dir=$tmpdir/test-project" >> $GITHUB_OUTPUT
+          echo "output_dir=$tmpdir/test-extension" >> $GITHUB_OUTPUT
 
       - name: Check generated files
         run: |
