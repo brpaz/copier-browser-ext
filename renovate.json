@@ -20,6 +20,7 @@
     "customManagers": [
         {
             "customType": "regex",
+            "description": "npm dependencies in package.json.jinja",
             "managerFilePatterns": [
                 "/^template/{{extension_slug}}/package\\.json\\.jinja$/"
             ],
@@ -27,7 +28,7 @@
                 "\\\"dependencies\\\"\\s*:\\s*\\{[\\s\\S]*?\\\"(?<depName>[@a-zA-Z0-9_./-]+)\\\"\\s*:\\s*\\\"(?<currentValue>[^\\\"]+)\\\"",
                 "\\\"devDependencies\\\"\\s*:\\s*\\{[\\s\\S]*?\\\"(?<depName>[@a-zA-Z0-9_./-]+)\\\"\\s*:\\s*\\\"(?<currentValue>[^\\\"]+)\\\""
             ],
-            "datasourceTemplate": "npm"
+            "datasourceTemplate": "npm",
         }
     ]
 }
