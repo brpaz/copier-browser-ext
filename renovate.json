@@ -11,6 +11,12 @@
     "reviewers": [
         "brpaz"
     ],
+    "github-actions": {
+        "fileMatch": [
+            "(^|/)\\.github/workflows/[^/]+\\.ya?ml$",
+            "(^|/)\\.github/workflows/[^/]+\\.ya?ml\\.jinja$"
+        ]
+    },
     "npm": {
         "managerFilePatterns": [
             "/template/\\{\\{extension_slug}}/package.json.jinja$/"
