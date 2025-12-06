@@ -21,7 +21,7 @@
         {
             "customType": "regex",
             "managerFilePatterns": [
-                "/^template/{{project_slug}}/package\\.json\\.jinja$/"
+                "/^template/{{extension_slug}}/package\\.json\\.jinja$/"
             ],
             "matchStrings": [
                 "\\\"dependencies\\\"\\s*:\\s*\\{[\\s\\S]*?\\\"(?<depName>[@a-zA-Z0-9_./-]+)\\\"\\s*:\\s*\\\"(?<currentValue>[^\\\"]+)\\\"",
