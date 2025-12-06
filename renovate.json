@@ -17,9 +17,16 @@
             "(^|/)\\.github/workflows/[^/]+\\.ya?ml\\.jinja$"
         ]
     },
-    "npm": {
-        "managerFilePatterns": [
-            "/template/\\{\\{extension_slug}}/package.json.jinja$/"
-        ]
-    }
+    "regexManagers": [
+        {
+            "fileMatch": [
+                "^template/{{project_slug}}/package\\.json\\.jinja$"
+            ],
+            "matchStrings": [
+                "\\\"dependencies\\\"\\s*:\\s*\\{[\\s\\S]*?\\\"(?<depName>[@a-zA-Z0-9_./-]+)\\\"\\s*:\\s*\\\"(?<currentValue>[^\\\"]+)\\\"",
+                "\\\"devDependencies\\\"\\s*:\\s*\\{[\\s\\S]*?\\\"(?<depName>[@a-zA-Z0-9_./-]+)\\\"\\s*:\\s*\\\"(?<currentValue>[^\\\"]+)\\\""
+            ],
+            "datasourceTemplate": "npm"
+        }
+    ]
 }
